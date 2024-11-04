@@ -1,12 +1,17 @@
 [Unit]
-Description=PWM Fan Control
-After=
+Description=PWM Fan Control Service
+After=multi-user.target
 
 [Service]
 Type=simple
 User=root
-ExecStart= /usr/bin/python /opt/fan_ctrl.py
+ExecStart=/usr/bin/python3 /opt/fan_control.py
 Restart=always
+RestartSec=5
+TimeoutStartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=pwm_fan_control
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
